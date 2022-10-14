@@ -1,8 +1,5 @@
 .wrapper {
-  background-color: #272f33;
   min-height      : 100vh;
-  background-color: #212529;
-
   .container {
 
     .header-buttons-wrapper {
@@ -73,9 +70,81 @@
           width : 80%;
           margin: auto;
 
+          .surah-details {
+            display        : flex;
+            justify-content: space-between;
+            align-items    : center;
+
+            .translation-details {
+              display       : flex;
+              flex-direction: column;
+              gap           : 5px;
+
+              p {
+                margin: 0;
+                color : #e7e9ea;
+
+                .change {
+                  color : #2ca4ab;
+                  cursor: pointer;
+                }
+
+                .change:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
+            .play-audio {
+              display       : flex;
+              flex-direction: column;
+              align-items   : center;
+              gap           : 15px;
+
+              .para {
+                display: flex;
+                gap    : 9px;
+                padding: 5px;
+                cursor : pointer;
+
+                p {
+                  margin: 0;
+                }
+              }
+
+              .info {
+                color: #e7e9ea;
+              }
+
+              .info:hover {
+                background-color: #343a40;
+              }
+
+              .audio {
+                color: #2ca4ab;
+              }
+
+              .audio:hover {
+                background-color: #2ca4ab;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75));
+              }
+            }
+          }
+
           .surah-card {
-            padding      : 20px 9px;
-            border-bottom: 1px solid #464b50;
+            padding        : 20px 9px;
+            border-bottom  : 1px solid #464b50;
+            display        : flex;
+            justify-content: space-between;
+            gap            : 20px;
+            align-items    : center;
+
+            .surah-card-options {
+              display       : flex;
+              flex-direction: column;
+              color         : #717477;
+              gap           : 9px;
+            }
 
             .surah-word-details {
               .word-in-arabic-container {
@@ -85,10 +154,11 @@
                 gap           : 5px;
 
                 .word-in-arabic {
-                  color     : #e7e9ea;
-                  text-align: right;
-                  font-size : 28px;
-                  cursor    : pointer;
+                  color      : #e7e9ea;
+                  text-align : right;
+                  font-size  : 28px;
+                  cursor     : pointer;
+                  line-height: 28px;
                 }
 
                 .word-in-arabic:hover {

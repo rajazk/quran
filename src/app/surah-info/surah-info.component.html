@@ -1,0 +1,36 @@
+<div class="surah-info-wrapper">
+  <div class="surah-info-container">
+    <div class="left-container">
+      <div class="details">
+        <p>
+          <fa-icon [icon]="faArrowLeft"></fa-icon>
+          Go to Search
+        </p><i class="fa-sharp fa-solid fa-arrow-left"></i>
+        <div class="surah-img">
+          <img src="https://quran.com/_next/image?url=%2Fimages%2Fmadinah.jpg&w=1920&q=75" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="right-container">
+      <div class="header">
+        <div>
+          <h1>Surah {{chapterData?.chapter.name_complex}}</h1>
+        </div>
+        <div>
+          <p><b>Ayahs</b></p>
+          <p>{{chapterData?.chapter.verses_count}}</p>
+        </div>
+        <div>
+          <p><b>Revelation Place</b></p>
+          <p>{{chapterData?.chapter.revelation_place | titlecase}}</p>
+        </div>
+      </div>
+      <div class="surah-details" [innerHtml]="surahInfoData?.chapter_info.text">
+
+      </div>
+    </div>
+    <div>
+
+    </div>
+  </div>
+</div>

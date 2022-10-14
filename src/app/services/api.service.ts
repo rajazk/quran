@@ -22,4 +22,14 @@ export class ApiService {
     const url = `${this.baseUrl}/verses/by_page/${pageNo}`
     return this.http.get<any>(url, { params: { ...paramsToSend } })
   }
+
+  getChapterInfo(paramsToSend: { language: string }, surahId: number): Observable<any> {
+    const url = `${this.baseUrl}/chapters/${surahId}/info`
+    return this.http.get<any>(url, { params: { ...paramsToSend } })
+  }
+
+  getChapter(surahId: number): Observable<any> {
+    const url = `${this.baseUrl}/chapters/${surahId}`
+    return this.http.get<any>(url)
+  }
 }

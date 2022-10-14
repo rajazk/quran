@@ -1,0 +1,63 @@
+p,
+h2,
+a,
+li {
+  color: #e7e9ea;
+}
+
+.surah-info-wrapper {
+  padding: 48px 0 0 0;
+
+  .surah-info-container {
+    width  : 80%;
+    margin : auto;
+    display: flex;
+
+    .left-container {
+      width: 15%;
+
+      .details {
+        p {
+          font-size: 16px;
+          color    : #fff;
+          padding  : 7px 13px;
+          cursor: pointer;
+        }
+
+        p:hover {
+          background-color:#fff ;
+          border-radius: 6px;
+          background-image: linear-gradient(to right, rgba(0,0,0,.75), rgba(0,0,0,.75));
+        }
+
+        .surah-img {
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .right-container {
+      width  : 85%;
+      padding: 0 20px;
+
+      .header {
+        border-bottom  : 1px solid #464b50;
+        display        : flex;
+        justify-content: space-between;
+
+        div {
+          display       : flex;
+          flex-direction: column;
+
+          p,
+          h1 {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+}

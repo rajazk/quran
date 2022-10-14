@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListChaptersComponent } from './list-chapters/list-chapters.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SurahInfoComponent } from './surah-info/surah-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListChaptersComponent
+    ListChaptersComponent,
+    SurahInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FontAwesomeModule,
 
   ],
   providers: [],
