@@ -8,12 +8,15 @@ import { ListChaptersComponent } from './list-chapters/list-chapters.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SurahInfoComponent } from './surah-info/surah-info.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListChaptersComponent,
-    SurahInfoComponent
+    SurahInfoComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import { SurahInfoComponent } from './surah-info/surah-info.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FontAwesomeModule,
-
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

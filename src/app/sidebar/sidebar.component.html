@@ -1,0 +1,65 @@
+<div class="sidebar-wrapper">
+  <div class="container">
+    <div class="body-left-container">
+      <div class="navigation-section">
+        <div class="nav">
+          <div class="item" [ngClass]="{'selected-item': selectedNavigation === 'surah'}"
+            (click)="selectedNavigation ='surah'">Surah</div>
+          <div class="item" [ngClass]="{'selected-item': selectedNavigation === 'juz'}"
+            (click)="selectedNavigation ='juz'">Juz</div>
+          <div class="item" [ngClass]="{'selected-item': selectedNavigation === 'page'}"
+            (click)="selectedNavigation = 'page'">Page</div>
+        </div>
+        <div class="close">
+          x
+        </div>
+      </div>
+      <div class="pages-details-container" *ngIf="selectedNavigation === 'page'">
+        <div class="search">
+          <input type="text" name="" id="" [(ngModel)]="pageSearch" placeholder="Search Page" (keyup)="FilterPageArray()">
+        </div>
+        <div class="pages">
+          <ul>
+            <li [ngClass]="{'selected-page': +(params |async)?.page === pageData.page}"
+              *ngFor="let pageData of totalPagesArrayFiltered" (click)="onPageChange(pageData.page)">Page {{pageData.page}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pages-details-container" *ngIf="selectedNavigation === 'juz'">
+        <div class="search">
+          <input type="text" name="" id="" placeholder="Search Page">
+        </div>
+        <div class="pages">
+          <ul>
+            <li [ngClass]="{'selected-page': (params |async)?.page === i+1}"
+              *ngFor="let page of totalJuzArray;let i = index" (click)="onPageChange(i+1)">Juz {{i+1}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pages-details-container-surah-section" *ngIf="selectedNavigation === 'surah'">
+        <div class="pages-details-container width-left">
+          <div class="search">
+            <input type="text" name="" id="" placeholder="Search Surah">
+          </div>
+          <div class="pages">
+            <ul>
+              <li [ngClass]="{'selected-page': (params |async)?.page === i+1}"
+                *ngFor="let page of totalJuzArray;let i = index" (click)="onPageChange(i+1)">Surah {{i+1}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pages-details-container width-right">
+          <div class="search">
+            <input type="text" name="" id="" placeholder="Verses">
+          </div>
+          <div class="pages">
+            <ul>
+              <li [ngClass]="{'selected-page': (params |async)?.page === i+1}"
+                *ngFor="let page of totalJuzArray;let i = index" (click)="onPageChange(i+1)">{{i+1}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
