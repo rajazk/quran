@@ -20,20 +20,16 @@ export interface pageDbResponse {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  params = new BehaviorSubject<pageParams | any>({
-    page: 1,
-    per_page: 1,
-    words: true,
-    language: 'en',
-    word_fields: 'text_uthmani,audio_url',
-    audio: 1
-  })
   pageData: pageDbResponse | any
   totalPagesArray = new Array(604)
   totalPagesArrayFiltered: any = []
   totalJuzArray = new Array(30)
+  totalJuzArrayFiltered: any = []
+
   selectedNavigation = 'surah'
   pageSearch = ''
+  juzSearch = ''
+  selectedPage = 1
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
@@ -45,37 +41,34 @@ export class SidebarComponent implements OnInit {
       }
     })
     this.totalPagesArray = [...this.totalPagesArrayFiltered]
-    this.totalJuzArray.map((r, index) => {
+    this.totalJuzArrayFiltered = [...this.totalJuzArray].map((r, index) => {
       return {
-        page: index + 1
+        juzNo: index + 1
       }
     })
+    this.totalJuzArray = [...this.totalJuzArrayFiltered]
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const initialParams: any = { ...this.params.value }
-      Object.keys(params).forEach(key => {
-        initialParams[key] = params[key]
-      })
-      this.params.next({ ...initialParams })
-      this.fetchPageData()
-    })
-  }
-  fetchPageData() {
-    this.api.getChaptersList(this.params.value, this.params.value.page).subscribe((r: pageDbResponse) => {
-      this.pageData = r
-      // console.log('PageDAta', this.pageData)
-    })
+
   }
 
+
   onPageChange(i: number) {
-    this.params.next({ ...this.params.value, page: +i })
-    console.log('va;ues', this.params.value)
-    this.router.navigate(['/'], { queryParams: { page: this.params.value.page } })
+    this.selectedPage = +i
+    this.router.navigate(['/'], { queryParams: { page: +i, nav: 'pages' } })
+  }
+
+  onJuzChange(i: number) {
+    this.selectedPage = +i
+
+    this.router.navigate(['/'], { queryParams: { juz: +i, nav: 'juz', page: 1 } })
   }
 
   FilterPageArray() {
     this.totalPagesArrayFiltered = [...this.totalPagesArray].filter(r => r.page.toString().includes(this.pageSearch.toString()))
+  }
+  FilterJuzArray() {
+    this.totalJuzArrayFiltered = [...this.totalJuzArray].filter(r => r.juzNo.toString().includes(this.juzSearch.toString()))
   }
 }

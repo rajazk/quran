@@ -9,6 +9,8 @@ export interface pageParams {
   per_page?: number
   word_fields: string
   audio: any
+  nav: string
+  juz: number
 }
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,21 @@ export class ApiService {
   constructor(
     private http: HttpClient,
   ) { }
-  getChaptersList(paramsToSend: pageParams, pageNo: number): Observable<any> {
-    const url = `${this.baseUrl}/verses/by_page/${pageNo}`
-    return this.http.get<any>(url, { params: { ...paramsToSend } })
+  getVersesByPageNo(paramsToSend: pageParams): Observable<any> {
+    let params: any = { ...paramsToSend }
+    delete (params.nav)
+    delete (params.juz)
+    delete (params.page)
+    delete (params.per_page)
+    const url = `${this.baseUrl}/verses/by_page/${paramsToSend.page}`
+    return this.http.get<any>(url, { params: { ...params } })
+  }
+
+  getVersesByJuzNo(paramsToSend: pageParams): Observable<any> {
+    let params: any = { ...paramsToSend }
+    delete (params.nav)
+    const url = `${this.baseUrl}/verses/by_juz/${paramsToSend.juz}`
+    return this.http.get<any>(url, { params: { ...params } })
   }
 
   getChapterInfo(paramsToSend: { language: string }, surahId: number): Observable<any> {

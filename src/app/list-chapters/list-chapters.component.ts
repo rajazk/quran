@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { apis } from 'src/environments/environment';
@@ -31,11 +31,13 @@ export class ListChaptersComponent implements OnInit {
   pageData: pageDbResponse | any
   params = new BehaviorSubject<pageParams>({
     page: 1,
-    per_page: 1,
+    per_page: 7,
     words: true,
     language: 'en',
     word_fields: 'text_uthmani,audio_url',
-    audio: 1
+    audio: 1,
+    nav: 'pages',
+    juz: 1
   })
   baseUrl = apis.baseUrl
   totalPagesArray = new Array(604)
@@ -45,6 +47,7 @@ export class ListChaptersComponent implements OnInit {
   wordSetInterval: any
   totalVerseTime: any = null
   currentAudioToPlayIndex = 0
+  isLoading = false
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
@@ -55,15 +58,40 @@ export class ListChaptersComponent implements OnInit {
       Object.keys(params).forEach(key => {
         initialParams[key] = params[key]
       })
-      console.log(params)
       this.params.next({ ...initialParams })
-
       this.fetchPageData()
     })
   }
+  @HostListener("window:scroll", ["$event"])
+  getScrollHeight(): void {
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 200 && !this.isLoading && this.params.value.nav === 'juz') {
+      this.isLoading = true;
+      if (
+        this.params.value.page++ < this.pageData.pagination.total_pages && this.pageData
+      ) {
+        this.router.navigate(['/'], { queryParams: { juz: this.params.value.juz, nav: 'juz', page: this.params.value.page++ } })
+      }
+    }
+  }
   fetchPageData() {
-    this.api.getChaptersList(this.params.value, this.params.value.page).subscribe((r: pageDbResponse) => {
-      this.pageData = r
+    this.isLoading = true
+    let apiDetails = this.api.getVersesByPageNo(this.params.value)
+    if (this.params.value.nav === 'juz') {
+      apiDetails = this.api.getVersesByJuzNo(this.params.value)
+    }
+    apiDetails.subscribe((r: pageDbResponse) => {
+      this.isLoading = false
+      let oldData: any = { ...this.pageData }
+      if (this.params.value.nav === 'juz' && this.pageData && +this.params.value.page !== 1) {
+        let newData: any = {
+          pagination: { ...r.pagination },
+          verses: [],
+        }
+        newData.verses.push(...oldData.verses, ...r.verses)
+        this.pageData = newData
+      } else {
+        this.pageData = r
+      }
       console.log('PageDAta', this.pageData)
     })
   }
