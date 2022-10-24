@@ -1,71 +1,3 @@
-<!-- <div class="wrapper">
-  <div class="container">
-    <div class="header-buttons-wrapper">
-      <div class="header-buttons-container">
-        <a class="selected">Translation</a>
-        <a>Reading</a>
-      </div>
-
-    </div>
-    <div class="page-body">
-      <div class="body-left-container">
-        <h1>Page Nos.</h1>
-        <div class="pages">
-          <ul>
-            <li [ngClass]="{'selected-page': (params |async)?.page === i+1}"
-              *ngFor="let page of totalPagesArray;let i = index" (click)="onPageChange(i+1)">Page {{i+1}}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="body-right-wrapper">
-        <div class="body-right-container">
-          <div class="surah-details">
-            <div class="translation-details">
-              <p>Translation By</p>
-              <p>Dr. Mustafa Khattab, the Clear Quran <span class="change">(Change)</span></p>
-            </div>
-            <div class="play-audio">
-              <div class="para info" [routerLink]="['/surah',pageData?.verses[0].verse_key.split(':')[0] ,'info']"
-                routerLinkActive="router-link-active">
-                <fa-icon [icon]="faCircleInfo"></fa-icon>
-                <p>Surah Info</p>
-              </div>
-              <div class="para audio" (click)="playFullAudio()">
-                <fa-icon [icon]="faPlay"></fa-icon>
-                <p class="">Play Audio</p>
-              </div>
-              <p></p>
-            </div>
-          </div>
-          <div class="surah-card" *ngFor="let surrah of pageData?.verses">
-            <div class="surah-card-options">
-              <span>{{surrah.verse_key}}</span>
-              <span>
-                <fa-icon [icon]="faPlay"></fa-icon>
-              </span>
-              <span>
-                <fa-icon [icon]="faComment"></fa-icon>
-              </span>
-              <span>
-                <fa-icon [icon]="faShareNodes"></fa-icon>
-              </span>
-              <span>...</span>
-            </div>
-            <div class="surah-word-details">
-              <div class="word-in-arabic-container">
-                <p class="word-in-arabic" *ngFor="let word of surrah?.words" (click)="playAudio(word.audio_url)">
-                  {{word.text_uthmani}}</p>
-              </div>
-              <div class="word-in-english-container">
-                <p class="word-in-english" *ngFor="let word of surrah?.words">{{word.translation.text}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="listing-wrapper">
   <app-sidebar></app-sidebar>
   <div class="body-right-wrapper">
@@ -76,11 +8,11 @@
           <p>Dr. Mustafa Khattab, the Clear Quran <span class="change">(Change)</span></p>
         </div>
         <div class="play-audio">
-          <div class="para info" [routerLink]="['/surah',pageData?.verses[0].verse_key.split(':')[0] ,'info']"
+          <!-- <div class="para info" [routerLink]="['/surah',pageData?.verses[0].verse_key.split(':')[0] ,'info']"
             routerLinkActive="router-link-active">
             <fa-icon [icon]="faCircleInfo"></fa-icon>
             <p>Surah Info</p>
-          </div>
+          </div> -->
           <div class="para audio" (click)="playFullAudio()">
             <fa-icon [icon]="faPlay"></fa-icon>
             <p class="">Play Audio</p>

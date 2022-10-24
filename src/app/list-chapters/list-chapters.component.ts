@@ -9,13 +9,14 @@ import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 export interface pageDbResponse {
   pagination: {
-    current_page: 1
+    current_page: number
     next_page: null
-    per_page: 7
-    total_pages: 1
-    total_records: 7
+    per_page: number
+    total_pages: number
+    total_records: number
   },
-  verses: []
+  verses: [],
+  verse?: any
 }
 @Component({
   selector: 'app-list-chapters',
@@ -37,7 +38,10 @@ export class ListChaptersComponent implements OnInit {
     word_fields: 'text_uthmani,audio_url',
     audio: 1,
     nav: 'pages',
-    juz: 1
+    juz: 1,
+    hizb: 1,
+    surah: 1,
+    verse: 1
   })
   baseUrl = apis.baseUrl
   totalPagesArray = new Array(604)
@@ -48,6 +52,7 @@ export class ListChaptersComponent implements OnInit {
   totalVerseTime: any = null
   currentAudioToPlayIndex = 0
   isLoading = false
+  selectedVerseData: any = {}
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
@@ -79,6 +84,9 @@ export class ListChaptersComponent implements OnInit {
     if (this.params.value.nav === 'juz') {
       apiDetails = this.api.getVersesByJuzNo(this.params.value)
     }
+    if (this.params.value.nav === 'surah') {
+      apiDetails = this.api.getVersesByVerseId(this.params.value)
+    }
     apiDetails.subscribe((r: pageDbResponse) => {
       this.isLoading = false
       let oldData: any = { ...this.pageData }
@@ -89,10 +97,17 @@ export class ListChaptersComponent implements OnInit {
         }
         newData.verses.push(...oldData.verses, ...r.verses)
         this.pageData = newData
+      } else if (this.params.value.nav === 'surah') {
+        console.log('asdf');
+        const data = {
+          verses: [
+            { ...r.verse }
+          ]
+        }
+        this.pageData = data
       } else {
         this.pageData = r
       }
-      console.log('PageDAta', this.pageData)
     })
   }
 

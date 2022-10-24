@@ -11,6 +11,9 @@ export interface pageParams {
   audio: any
   nav: string
   juz: number
+  hizb?: number
+  surah?: number,
+  verse?: number
 }
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,11 @@ export class ApiService {
   baseUrl = apis.baseUrl
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+    this.getChapters().subscribe(r => {
+      console.log('chapter data', r);
+    })
+  }
   getVersesByPageNo(paramsToSend: pageParams): Observable<any> {
     let params: any = { ...paramsToSend }
     delete (params.nav)
@@ -37,6 +44,12 @@ export class ApiService {
     return this.http.get<any>(url, { params: { ...params } })
   }
 
+  getVersesByVerseId(paramsToSend: pageParams): Observable<any> {
+    const url = `${this.baseUrl}/verses/by_key/${paramsToSend.surah}:${paramsToSend.verse}?language=en&words=true`
+    return this.http.get<any>(url, { params: { ...paramsToSend } })
+  }
+
+
   getChapterInfo(paramsToSend: { language: string }, surahId: number): Observable<any> {
     const url = `${this.baseUrl}/chapters/${surahId}/info`
     return this.http.get<any>(url, { params: { ...paramsToSend } })
@@ -44,6 +57,11 @@ export class ApiService {
 
   getChapter(surahId: number): Observable<any> {
     const url = `${this.baseUrl}/chapters/${surahId}`
+    return this.http.get<any>(url)
+  }
+
+  getChapters(): Observable<any> {
+    const url = `${this.baseUrl}/chapters`
     return this.http.get<any>(url)
   }
 }

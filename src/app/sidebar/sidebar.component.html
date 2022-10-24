@@ -4,17 +4,17 @@
       <div class="navigation-section">
         <div class="nav">
           <div class="item" [ngClass]="{'selected-item': selectedNavigation === 'surah'}"
-            (click)="selectedNavigation ='surah'">Surah</div>
+            (click)="selectedNavigation ='surah';onSurahChange(1)">Surah</div>
           <div class="item" [ngClass]="{'selected-item': selectedNavigation === 'juz'}"
-            (click)="selectedNavigation ='juz'">Juz</div>
-          <div class="item" [ngClass]="{'selected-item': selectedNavigation === 'page'}"
-            (click)="selectedNavigation = 'page'">Page</div>
+            (click)="selectedNavigation ='juz';onJuzChange(1)">Juz</div>
+          <div class="item" [ngClass]="{'selected-item': selectedNavigation === 'pages'}"
+            (click)="selectedNavigation = 'pages';onPageChange(1)">Page</div>
         </div>
         <div class="close">
           x
         </div>
       </div>
-      <div class="pages-details-container" *ngIf="selectedNavigation === 'page'">
+      <div class="pages-details-container" *ngIf="selectedNavigation === 'pages'">
         <div class="search">
           <input type="text" name="" id="" [(ngModel)]="pageSearch" placeholder="Search Page"
             (keyup)="FilterPageArray()">
@@ -34,7 +34,7 @@
         <div class="pages">
           <ul>
             <li [ngClass]="{'selected-page':selectedPage === juz.juzNo}"
-              *ngFor="let juz of totalJuzArrayFiltered;let i = index" (click)="onJuzChange(juz.juzNo)">Juz {{juz.juzNo}}
+              *ngFor="let juz of totalJuzArrayFiltered" (click)="onJuzChange(juz.juzNo)">Juz {{juz.juzNo}}
             </li>
           </ul>
         </div>
@@ -42,23 +42,25 @@
       <div class="pages-details-container-surah-section" *ngIf="selectedNavigation === 'surah'">
         <div class="pages-details-container width-left">
           <div class="search">
-            <input type="text" name="" id="" placeholder="Search Surah">
+            <input type="text" name="" id="" placeholder="Search Surah" [(ngModel)]="surahSearch"  (keyup)="FilterSearchArray()">
           </div>
           <div class="pages">
             <ul>
-              <li [ngClass]="{'selected-page': selectedPage === i+1}" *ngFor="let page of totalJuzArray;let i = index"
-                (click)="onPageChange(i+1)">Surah {{i+1}}</li>
+              <li [ngClass]="{'selected-page': selectedPage === chapter.id}"
+                *ngFor="let chapter of filteredChaptersList" (click)="onSurahChange(chapter.id)">{{chapter.id}} <span>{{
+                  chapter.name_simple}}</span>
+              </li>
             </ul>
           </div>
         </div>
         <div class="pages-details-container width-right">
           <div class="search">
-            <input type="text" name="" id="" placeholder="Verses">
+            <input type="text" name="" id="" placeholder="Verse" [(ngModel)]="verseSearch"  (keyup)="FilterVerseArray()">
           </div>
           <div class="pages">
             <ul>
-              <li [ngClass]="{'selected-page': selectedPage === i+1}" *ngFor="let page of totalJuzArray;let i = index"
-                (click)="onPageChange(i+1)">{{i+1}}</li>
+              <li [ngClass]="{'selected-page': selectedVerse === verse.page}" *ngFor="let verse of filteredVersesArray"
+                (click)="onVerseChange(verse.page)">{{verse.page}}</li>
             </ul>
           </div>
         </div>
