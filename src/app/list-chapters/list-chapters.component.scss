@@ -1,201 +1,14 @@
-// .wrapper {
-//   min-height      : 100vh;
-//   .container {
-
-//     .header-buttons-wrapper {
-//       width          : 90%;
-//       margin         : auto;
-//       display        : flex;
-//       justify-content: center;
-//       padding        : 30px 0;
-
-//       .header-buttons-container {
-//         display         : flex;
-//         justify-content : center;
-//         gap             : 10px;
-//         background-color: #272f33;
-//         border-radius   : 20rem;
-
-//         a {
-//           padding   : 10px 13px;
-//           min-width : 150px;
-//           color     : #e7e9ea;
-//           text-align: center;
-//         }
-
-//         .selected {
-//           background-color: #343a40;
-//           border-radius   : 20rem;
-//         }
-//       }
-//     }
-
-//     .page-body {
-//       display: flex;
-
-//       .body-left-container {
-//         width           : 20%;
-//         background-color: #343a40;
-//         padding         : 20px;
-
-//         .pages {
-//           max-height: calc(100vh - 150px);
-//           overflow-y: scroll;
-
-//           ul {
-//             list-style-type: none;
-//             padding        : 0;
-//             margin         : 0;
-
-//             li {
-//               margin : 0 0 0 15px;
-//               padding: 10px 24px;
-//               color  : #e7e9ea;
-//               cursor : pointer;
-//             }
-
-//             li:hover,
-//             .selected-page {
-//               background-color: #212529;
-//               border-radius   : 0.5rem;
-//             }
-//           }
-//         }
-//       }
-
-//       .body-right-wrapper {
-//         width: 80%;
-
-//         .body-right-container {
-//           width : 80%;
-//           margin: auto;
-
-//           .surah-details {
-//             display        : flex;
-//             justify-content: space-between;
-//             align-items    : center;
-
-//             .translation-details {
-//               display       : flex;
-//               flex-direction: column;
-//               gap           : 5px;
-
-//               p {
-//                 margin: 0;
-//                 color : #e7e9ea;
-
-//                 .change {
-//                   color : #2ca4ab;
-//                   cursor: pointer;
-//                 }
-
-//                 .change:hover {
-//                   text-decoration: underline;
-//                 }
-//               }
-//             }
-
-//             .play-audio {
-//               display       : flex;
-//               flex-direction: column;
-//               align-items   : center;
-//               gap           : 15px;
-
-//               .para {
-//                 display: flex;
-//                 gap    : 9px;
-//                 padding: 5px;
-//                 cursor : pointer;
-
-//                 p {
-//                   margin: 0;
-//                 }
-//               }
-
-//               .info {
-//                 color: #e7e9ea;
-//               }
-
-//               .info:hover {
-//                 background-color: #343a40;
-//               }
-
-//               .audio {
-//                 color: #2ca4ab;
-//               }
-
-//               .audio:hover {
-//                 background-color: #2ca4ab;
-//                 background-image: linear-gradient(to right, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75));
-//               }
-//             }
-//           }
-
-//           .surah-card {
-//             padding        : 20px 9px;
-//             border-bottom  : 1px solid #464b50;
-//             display        : flex;
-//             justify-content: space-between;
-//             gap            : 20px;
-//             align-items    : center;
-
-//             .surah-card-options {
-//               display       : flex;
-//               flex-direction: column;
-//               color         : #717477;
-//               gap           : 9px;
-//             }
-
-//             .surah-word-details {
-//               .word-in-arabic-container {
-//                 display       : flex;
-//                 flex-direction: row-reverse;
-//                 flex-wrap     : wrap;
-//                 gap           : 5px;
-
-//                 .word-in-arabic {
-//                   color      : #e7e9ea;
-//                   text-align : right;
-//                   font-size  : 28px;
-//                   cursor     : pointer;
-//                   line-height: 28px;
-//                 }
-
-//                 .word-in-arabic:hover {
-//                   color: #2ca4ab;
-//                 }
-//               }
-
-//               .word-in-english-container {
-//                 display   : flex;
-//                 gap       : 5px;
-//                 margin-top: 50px;
-//                 flex-wrap : wrap;
-
-//                 .word-in-english {
-//                   color    : #e7e9ea;
-//                   font-size: 28px;
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-
-//   .hidden {
-//     display: none;
-//   }
-// }
-
 .listing-wrapper {
   display: flex;
-  app-sidebar{
+  padding: 2px 0;
+
+  app-sidebar {
     width: 20%;
   }
+
   .body-right-wrapper {
-    width: 80%;
+    width     : 80%;
+    margin-top: 40px;
 
     .body-right-container {
       width : 80%;
@@ -311,5 +124,13 @@
         }
       }
     }
+  }
+
+  .hidden-sidebar {
+    display: none;
+  }
+
+  .max-body-width {
+    width: 100%;
   }
 }

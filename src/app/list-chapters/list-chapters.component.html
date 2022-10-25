@@ -1,6 +1,6 @@
 <div class="listing-wrapper">
-  <app-sidebar></app-sidebar>
-  <div class="body-right-wrapper">
+  <app-sidebar [ngClass]="{'hidden-sidebar': !api.isSidebarShow}"></app-sidebar>
+  <div class="body-right-wrapper" [ngClass]="{'max-body-width': !api.isSidebarShow}">
     <div class="body-right-container">
       <div class="surah-details">
         <div class="translation-details">

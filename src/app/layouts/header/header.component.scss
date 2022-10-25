@@ -1,0 +1,46 @@
+h1,
+p {
+  margin: 0;
+}
+
+.wrapper {
+  background-color: #343a40;
+  padding         : 20px 20px 5px 20px;
+  display         : flex;
+  flex-direction  : column;
+  align-items     : flex-start;
+  gap             : 12px;
+  position        : relative;
+
+  .top-container {
+    .title {
+      color: #e7e9ea;
+    }
+  }
+
+  .bot-container {
+    .surah-name {
+      cursor: pointer;
+      p {
+        color      : #e7e9ea;
+        font-weight: bold;
+        font-size  : 16px;
+        display    : flex;
+        gap        : 20px;
+
+        .arrow {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .line {
+    position        : absolute;
+    bottom          : -2px;
+    left            : 0;
+    height          : 2px;
+    background-color: white;
+    width           : 20%;
+  }
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService, pageParams } from '../services/api.service';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 export interface pageDbResponse {
@@ -20,6 +21,7 @@ export interface pageDbResponse {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  faXmark = faXmark
   pageData: pageDbResponse | any
   totalPagesArray = new Array(604)
   totalPagesArrayFiltered: any = []
@@ -38,7 +40,7 @@ export class SidebarComponent implements OnInit {
   versesArray: any = []
   filteredVersesArray: any = []
   constructor(
-    private api: ApiService,
+    public api: ApiService,
     private route: ActivatedRoute,
     private router: Router
   ) {

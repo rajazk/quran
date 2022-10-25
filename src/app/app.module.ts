@@ -10,13 +10,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SurahInfoComponent } from './surah-info/surah-info.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './layouts/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListChaptersComponent,
     SurahInfoComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

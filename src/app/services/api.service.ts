@@ -20,6 +20,7 @@ export interface pageParams {
 })
 export class ApiService {
   baseUrl = apis.baseUrl
+  isSidebarShow = true
   constructor(
     private http: HttpClient,
   ) {

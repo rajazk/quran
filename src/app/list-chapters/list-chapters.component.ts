@@ -54,7 +54,7 @@ export class ListChaptersComponent implements OnInit {
   isLoading = false
   selectedVerseData: any = {}
   constructor(
-    private api: ApiService,
+    public api: ApiService,
     private route: ActivatedRoute,
     private router: Router
   ) {

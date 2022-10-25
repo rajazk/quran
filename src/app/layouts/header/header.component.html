@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="top-container">
+    <div>
+      <h1 class="title">QURAN.COM</h1>
+    </div>
+    <div></div>
+  </div>
+  <div class="bot-container">
+    <div class="surah-name" (click)="api.isSidebarShow = !api.isSidebarShow">
+      <p><span>Al-Faitah</span>
+        <fa-icon *ngIf="api.isSidebarShow" [icon]="faChevronUp" class="arrow"></fa-icon>
+        <fa-icon *ngIf="!api.isSidebarShow" [icon]="faChevronDown" class="arrow"></fa-icon>
+      </p>
+    </div>
+    <div></div>
+  </div>
+  <div class="line">
+
+  </div>
+</div>
