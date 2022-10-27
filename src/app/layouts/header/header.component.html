@@ -5,9 +5,13 @@
     </div>
     <div></div>
   </div>
-  <div class="bot-container">
+  <div *ngIf="api.chaptersData.length > 0" class="bot-container">
     <div class="surah-name" (click)="api.isSidebarShow = !api.isSidebarShow">
-      <p><span>Al-Faitah</span>
+      <p>
+        <span *ngIf="paramsData.nav === 'surah'">{{api.chaptersData[+paramsData.surah -
+          1].name_simple}}</span>
+        <span *ngIf="paramsData.nav === 'pages'">Page : {{paramsData.page?paramsData.page:1 }}</span>
+        <span *ngIf="paramsData.nav === 'juz'">Juz : {{+paramsData.juz }}</span>
         <fa-icon *ngIf="api.isSidebarShow" [icon]="faChevronUp" class="arrow"></fa-icon>
         <fa-icon *ngIf="!api.isSidebarShow" [icon]="faChevronDown" class="arrow"></fa-icon>
       </p>

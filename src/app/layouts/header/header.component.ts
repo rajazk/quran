@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'src/app/services/api.service';
@@ -11,7 +12,16 @@ import { ApiService } from 'src/app/services/api.service';
 export class HeaderComponent implements OnInit {
   faChevronUp = faChevronUp
   faChevronDown = faChevronDown
-  constructor(public api: ApiService) { }
+  paramsData: any = {}
+  constructor(public api: ApiService, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      const initialParams: any = {}
+      Object.keys(params).forEach(key => {
+        initialParams[key] = params[key]
+      })
+      this.paramsData = { ...initialParams }
+    })
+  }
 
   ngOnInit(): void {
   }

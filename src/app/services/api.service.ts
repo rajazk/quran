@@ -21,11 +21,13 @@ export interface pageParams {
 export class ApiService {
   baseUrl = apis.baseUrl
   isSidebarShow = true
+  chaptersData: any = []
   constructor(
     private http: HttpClient,
   ) {
     this.getChapters().subscribe(r => {
       console.log('chapter data', r);
+      this.chaptersData = r.chapters
     })
   }
   getVersesByPageNo(paramsToSend: pageParams): Observable<any> {

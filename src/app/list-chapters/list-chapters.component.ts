@@ -59,6 +59,9 @@ export class ListChaptersComponent implements OnInit {
     private router: Router
   ) {
     this.route.queryParams.subscribe(params => {
+      if (!params.hasOwnProperty('nav')) {
+        this.router.navigate(['/'], { queryParams: { nav: 'pages' } })
+      }
       const initialParams: any = { ...this.params.value }
       Object.keys(params).forEach(key => {
         initialParams[key] = params[key]
