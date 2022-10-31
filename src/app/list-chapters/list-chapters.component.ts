@@ -65,7 +65,7 @@ export class ListChaptersComponent implements OnInit {
     private router: Router
   ) {
     this.route.queryParams.subscribe(params => {
-      this.pauseAudio()
+      this.pauseAudio(true)
       if (!params.hasOwnProperty('nav')) {
         this.router.navigate(['/'], { queryParams: { nav: 'pages' } })
       }
@@ -125,9 +125,12 @@ export class ListChaptersComponent implements OnInit {
       }
     })
   }
-  pauseAudio() {
+  pauseAudio(paramsChanged?: boolean) {
     clearInterval(this.verseSetInterval)
     clearInterval(this.wordSetInterval)
+    if (paramsChanged) {
+      this.currentAudioToPlayIndex = 0
+    }
     this.selectedWord = null
     if (this.currentAudio) {
       this.currentAudio.pause()
