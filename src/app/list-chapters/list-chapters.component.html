@@ -7,7 +7,7 @@
           <p>Translation By</p>
           <p>Dr. Mustafa Khattab, the Clear Quran <span class="change">(Change)</span></p>
         </div>
-        <div class="play-audio">
+        <div class="play-audio" *ngIf="pageData?.verses">
           <!-- <div class="para info" [routerLink]="['/surah',pageData?.verses[0].verse_key.split(':')[0] ,'info']"
             routerLinkActive="router-link-active">
             <fa-icon [icon]="faCircleInfo"></fa-icon>
