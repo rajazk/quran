@@ -65,6 +65,7 @@ export class ListChaptersComponent implements OnInit {
     private router: Router
   ) {
     this.route.queryParams.subscribe(params => {
+      this.pauseAudio()
       if (!params.hasOwnProperty('nav')) {
         this.router.navigate(['/'], { queryParams: { nav: 'pages' } })
       }
