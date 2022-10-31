@@ -13,18 +13,23 @@
             <fa-icon [icon]="faCircleInfo"></fa-icon>
             <p>Surah Info</p>
           </div> -->
-          <div class="para audio" (click)="playFullAudio()">
+          <div class="para audio" *ngIf="!currentAudio" (click)="onPlayFullAudio()">
             <fa-icon [icon]="faPlay"></fa-icon>
             <p class="">Play Audio</p>
+          </div>
+          <div class="para audio" *ngIf="currentAudio" (click)="pauseAudio()">
+            <fa-icon [icon]="faPause"></fa-icon>
+            <p class="">Pause Audio</p>
           </div>
           <p></p>
         </div>
       </div>
-      <div class="surah-card" *ngFor="let surrah of pageData?.verses">
+      <div class="surah-card" *ngFor="let surrah of pageData?.verses;let surahIndex = index">
         <div class="surah-card-options">
           <span>{{surrah.verse_key}}</span>
           <span>
-            <fa-icon [icon]="faPlay"></fa-icon>
+            <fa-icon class="icon" *ngIf="!currentAudio" [icon]="faPlay" (click)="playVerseAudio(surrah)"></fa-icon>
+            <fa-icon class="icon" *ngIf="currentAudio" [icon]="faPause" (click)="pauseAudio()"></fa-icon>
           </span>
           <span>
             <fa-icon [icon]="faComment"></fa-icon>
@@ -36,7 +41,9 @@
         </div>
         <div class="surah-word-details">
           <div class="word-in-arabic-container">
-            <p class="word-in-arabic" *ngFor="let word of surrah?.words" (click)="playAudio(word.audio_url)">
+            <p class="word-in-arabic" *ngFor="let word of surrah?.words;let wordIndex = index"
+              [ngClass]="{'word-in-arabic-higlight': selectedWord === surahIndex+' '+wordIndex }"
+              (click)="playAudioOfWord(word,wordIndex,surahIndex)">
               {{word.text_uthmani}}</p>
           </div>
           <div class="word-in-english-container">

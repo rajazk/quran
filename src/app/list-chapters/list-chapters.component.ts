@@ -4,6 +4,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { apis } from 'src/environments/environment';
 import { ApiService, pageParams } from '../services/api.service';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faPause } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
@@ -29,6 +30,7 @@ export class ListChaptersComponent implements OnInit {
   faComment = faComment
   faShareNodes = faShareNodes
   faCircleInfo = faCircleInfo
+  faPause = faPause
   pageData: pageDbResponse | any
   params = new BehaviorSubject<pageParams>({
     page: 1,
@@ -53,6 +55,10 @@ export class ListChaptersComponent implements OnInit {
   currentAudioToPlayIndex = 0
   isLoading = false
   selectedVerseData: any = {}
+  selectedVerse: any = null
+  selectedWord: any = null
+  selectedVerseIndex: any = null
+  selectedWordIndex: any = null
   constructor(
     public api: ApiService,
     private route: ActivatedRoute,
@@ -70,6 +76,11 @@ export class ListChaptersComponent implements OnInit {
       this.fetchPageData()
     })
   }
+
+  ngOnInit(): void {
+  }
+
+
   @HostListener("window:scroll", ["$event"])
   getScrollHeight(): void {
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 200 && !this.isLoading && this.params.value.nav === 'juz') {
@@ -113,8 +124,14 @@ export class ListChaptersComponent implements OnInit {
       }
     })
   }
-
-  ngOnInit(): void {
+  pauseAudio() {
+    clearInterval(this.verseSetInterval)
+    clearInterval(this.wordSetInterval)
+    this.selectedWord = null
+    if (this.currentAudio) {
+      this.currentAudio.pause()
+      this.currentAudio = null
+    }
   }
 
   onPageChange(i: number) {
@@ -122,16 +139,40 @@ export class ListChaptersComponent implements OnInit {
     this.router.navigate(['/'], { queryParams: { page: this.params.value.page } })
   }
 
-  playAudio(audioUrl: string) {
-    if (this.currentAudio) {
-      this.currentAudio.pause()
-      this.currentAudio = null
-    }
+  playAudioOfWord(word: any, wordIndex: number, surahIndex: number) {
+    const audioUrl = word.audio_url
+    this.pauseAudio()
     if (audioUrl && !this.currentAudio) {
+      this.totalVerseTime = this.getWordTime(wordIndex, surahIndex)
+      this.currentAudio = new Audio()
+      this.currentAudio.src = `https://verses.quran.com/${audioUrl}`
+      this.currentAudio.play()
+      this.selectedWord = `${surahIndex} ${wordIndex}`
+      this.currentAudio.onended = () => {
+        this.pauseAudio()
+      };
+    }
+  }
+
+
+  playVerseAudio(surrah: any) {
+    const audioUrl = surrah.audio.url
+    this.pauseAudio()
+    if (audioUrl && !this.currentAudio) {
+      this.totalVerseTime = this.getVerseTime(surrah)
       this.currentAudio = new Audio()
       this.currentAudio.src = `https://verses.quran.com/${audioUrl}`
       this.currentAudio.play()
     }
+    this.currentAudioToPlayIndex = this.pageData.verses.findIndex((item: any) => item.id === surrah.id)
+    this.highlightWords()
+    this.verseSetInterval = setTimeout(() => {
+      this.pauseAudio()
+    }, this.totalVerseTime);
+  }
+  onPlayFullAudio() {
+    this.pauseAudio()
+    this.playFullAudioWIP()
   }
   playFullAudio() {
     const arrayLength = this.pageData.verses.length
@@ -141,8 +182,24 @@ export class ListChaptersComponent implements OnInit {
     this.currentAudio.play()
     this.highlightWords()
     this.verseSetInterval = setInterval(() => {
+      this.pauseAudio()
       this.currentAudioToPlayIndex++
-      clearInterval(this.verseSetInterval)
+      if (this.currentAudioToPlayIndex < arrayLength) {
+        this.playFullAudio()
+      }
+    }, this.totalVerseTime);
+  }
+
+  playFullAudioWIP() {
+    const arrayLength = this.pageData.verses.length
+    this.totalVerseTime = this.getVerseTime(this.pageData.verses[this.currentAudioToPlayIndex])
+    this.currentAudio = new Audio
+    this.currentAudio.src = `https://verses.quran.com/${this.pageData.verses[this.currentAudioToPlayIndex].audio.url}`
+    this.currentAudio.play()
+    this.highlightWords()
+    this.verseSetInterval = setInterval(() => {
+      this.pauseAudio()
+      this.currentAudioToPlayIndex++
       if (this.currentAudioToPlayIndex < arrayLength) {
         this.playFullAudio()
       }
@@ -153,8 +210,23 @@ export class ListChaptersComponent implements OnInit {
 
     return verseTime
   }
-  highlightWords() {
+  getWordTime(wordIndex: any, surahIndex: any) {
+    const wordTimeArrayPreviousIndexValue = this.pageData.verses[surahIndex].audio.segments[wordIndex - 1]
+    const wordTimeArray = this.pageData.verses[surahIndex].audio.segments[wordIndex]
+    const wordTime = wordTimeArray[3] - (wordTimeArrayPreviousIndexValue ? wordTimeArrayPreviousIndexValue[3] : 0)
+    console.log(wordTime);
 
+
+    return wordTime
+  }
+  highlightWords() {
+    this.wordSetInterval = setInterval(() => {
+      const verseAudioSegment = this.pageData.verses[this.currentAudioToPlayIndex].audio.segments
+      const wordIndex = verseAudioSegment.findIndex((time: any) => (time[3] / 1000) >= (this.currentAudio.currentTime))
+      if (wordIndex > -1) {
+        this.selectedWord = `${this.currentAudioToPlayIndex} ${wordIndex}`
+      }
+    }, 0)
   }
   onAudioEnded() {
 

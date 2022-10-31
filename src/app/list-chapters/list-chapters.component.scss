@@ -88,6 +88,12 @@
           flex-direction: column;
           color         : #717477;
           gap           : 9px;
+
+          span {
+            .icon {
+              cursor: pointer;
+            }
+          }
         }
 
         .surah-word-details {
@@ -106,6 +112,10 @@
             }
 
             .word-in-arabic:hover {
+              color: #2ca4ab;
+            }
+
+            .word-in-arabic-higlight {
               color: #2ca4ab;
             }
           }
