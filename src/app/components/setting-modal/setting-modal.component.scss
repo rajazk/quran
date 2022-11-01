@@ -1,0 +1,40 @@
+.setting-modal-wrapper {
+  .content {
+    .example-section {
+      margin: 12px 0;
+    }
+
+    .example-margin {
+      margin: 0 12px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin-top     : 4px;
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    gap    : 8px;
+
+    button {
+      flex         : 1;
+      color        : white;
+      padding      : 5px;
+      border-radius: 10px;
+      border       : none;
+      outline      : none;
+      cursor       : pointer;
+    }
+
+    .done {
+      background-color: #1f2125;
+    }
+
+    .cancel {
+      background-color: #ccc;
+
+    }
+  }
+}

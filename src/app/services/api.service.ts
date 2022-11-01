@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { apis } from 'src/environments/environment';
 export interface pageParams {
   language?: string
@@ -13,7 +13,8 @@ export interface pageParams {
   juz: number
   hizb?: number
   surah?: number,
-  verse?: number
+  verse?: number,
+  translations?: string
 }
 @Injectable({
   providedIn: 'root'
@@ -22,12 +23,17 @@ export class ApiService {
   baseUrl = apis.baseUrl
   isSidebarShow = true
   chaptersData: any = []
+  translations = new Subject()
   constructor(
     private http: HttpClient,
   ) {
     this.getChapters().subscribe(r => {
       console.log('chapter data', r);
       this.chaptersData = r.chapters
+    })
+    this.getLanguages().subscribe(r=>{
+      console.log('languages=',r);
+
     })
   }
   getVersesByPageNo(paramsToSend: pageParams): Observable<any> {
@@ -52,6 +58,10 @@ export class ApiService {
     return this.http.get<any>(url, { params: { ...paramsToSend } })
   }
 
+  getLanguages(): Observable<any> {
+    const url = `${this.baseUrl}/resources/languages`
+    return this.http.get<any>(url)
+  }
 
   getChapterInfo(paramsToSend: { language: string }, surahId: number): Observable<any> {
     const url = `${this.baseUrl}/chapters/${surahId}/info`

@@ -1,0 +1,27 @@
+<div class="setting-modal-wrapper">
+  <h1>Settings</h1>
+  <div class="content">
+    <h3>Choose translation</h3>
+    <section class="example-section">
+      <span class="example-list-section">
+        <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
+          (change)="setAll($event.checked)">
+          {{data.name}}
+        </mat-checkbox>
+      </span>
+      <span class="example-list-section">
+        <ul>
+          <li *ngFor="let language of data.languages">
+            <mat-checkbox [(ngModel)]="language.completed" (ngModelChange)="updateAllComplete()">
+              {{language.name}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </section>
+  </div>
+  <div class="btn-container">
+    <button type="button" class="cancel" (click)="dialogRef.close()">Cancel</button>
+    <button type="button" class="done" (click)="sendData()">Done</button>
+  </div>
+</div>

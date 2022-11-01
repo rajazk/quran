@@ -8,11 +8,6 @@
           <p>Dr. Mustafa Khattab, the Clear Quran <span class="change">(Change)</span></p>
         </div>
         <div class="play-audio" *ngIf="pageData?.verses">
-          <!-- <div class="para info" [routerLink]="['/surah',pageData?.verses[0].verse_key.split(':')[0] ,'info']"
-            routerLinkActive="router-link-active">
-            <fa-icon [icon]="faCircleInfo"></fa-icon>
-            <p>Surah Info</p>
-          </div> -->
           <div class="para audio" *ngIf="!currentAudio" (click)="onPlayFullAudio()">
             <fa-icon [icon]="faPlay"></fa-icon>
             <p class="">Play Audio</p>
@@ -47,7 +42,9 @@
               {{word.text_uthmani}}</p>
           </div>
           <div class="word-in-english-container">
-            <p class="word-in-english" *ngFor="let word of surrah?.words">{{word.translation.text}}</p>
+            <p class="word-in-english"
+              [ngClass]="{'word-in-english': verse.resource_id === 131,'word-in-urdu': verse.resource_id === 234}"
+              *ngFor="let verse of surrah?.translations" [innerHtml]="sanitizer.bypassSecurityTrustHtml(verse.text)"></p>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { faPause } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { DomSanitizer } from '@angular/platform-browser';
 export interface pageDbResponse {
   pagination: {
     current_page: number
@@ -43,7 +44,8 @@ export class ListChaptersComponent implements OnInit {
     juz: 1,
     hizb: 1,
     surah: 1,
-    verse: 1
+    verse: 1,
+    translations: ''
   })
   baseUrl = apis.baseUrl
   totalPagesArray = new Array(604)
@@ -62,7 +64,8 @@ export class ListChaptersComponent implements OnInit {
   constructor(
     public api: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public sanitizer: DomSanitizer
   ) {
     this.route.queryParams.subscribe(params => {
       this.pauseAudio(true)
@@ -75,6 +78,19 @@ export class ListChaptersComponent implements OnInit {
       })
       this.params.next({ ...initialParams })
       this.fetchPageData()
+    })
+    this.api.translations.subscribe((r: any) => {
+      if (r.length) {
+        let languages = ''
+        r.forEach((item: any) => {
+          languages = languages ? languages + `,${item.id}` : item.id
+        })
+        console.log('selected Languages', languages)
+        this.params.next({ ...this.params.value, translations: languages })
+        this.fetchPageData()
+
+      }
+
     })
   }
 

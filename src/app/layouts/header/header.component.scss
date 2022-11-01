@@ -13,6 +13,22 @@ p {
   position        : relative;
 
   .top-container {
+    width          : 100%;
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+
+    .icons-container {
+      fa-icon {
+        color    : #e7e9ea;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      fa-icon:hover{
+        opacity: 0.4;
+      }
+    }
+
     .title {
       color: #e7e9ea;
     }
@@ -21,6 +37,7 @@ p {
   .bot-container {
     .surah-name {
       cursor: pointer;
+
       p {
         color      : #e7e9ea;
         font-weight: bold;

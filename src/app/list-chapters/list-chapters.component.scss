@@ -97,6 +97,8 @@
         }
 
         .surah-word-details {
+          flex: 1;
+
           .word-in-arabic-container {
             display       : flex;
             flex-direction: row-reverse;
@@ -121,14 +123,22 @@
           }
 
           .word-in-english-container {
-            display   : flex;
-            gap       : 5px;
             margin-top: 50px;
-            flex-wrap : wrap;
+
+            .word-in-english,
+            .word-in-urdu {
+              color        : #e7e9ea;
+              font-size    : 28px;
+              margin-bottom: 30px;
+              line-height  : 30px;
+            }
 
             .word-in-english {
-              color    : #e7e9ea;
-              font-size: 28px;
+              text-align: left;
+            }
+
+            .word-in-urdu {
+              text-align: right;
             }
           }
         }

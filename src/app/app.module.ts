@@ -11,6 +11,10 @@ import { SurahInfoComponent } from './surah-info/surah-info.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './layouts/header/header.component';
+import { SettingModalComponent } from './components/setting-modal/setting-modal.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -18,15 +22,19 @@ import { HeaderComponent } from './layouts/header/header.component';
     ListChaptersComponent,
     SurahInfoComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    SettingModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatDialogModule,
     HttpClientModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
