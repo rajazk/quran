@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     name: 'Select All',
     completed: false,
     languages: [
-      { name: 'English', completed: false, id: 131 },
+      { name: 'English', completed: true, id: 131 },
       { name: 'Urdu', completed: false, id: 234 },
     ],
   }

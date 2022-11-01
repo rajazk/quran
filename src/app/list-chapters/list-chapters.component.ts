@@ -45,7 +45,7 @@ export class ListChaptersComponent implements OnInit {
     hizb: 1,
     surah: 1,
     verse: 1,
-    translations: ''
+    translations: '131'
   })
   baseUrl = apis.baseUrl
   totalPagesArray = new Array(604)
@@ -80,17 +80,12 @@ export class ListChaptersComponent implements OnInit {
       this.fetchPageData()
     })
     this.api.translations.subscribe((r: any) => {
-      if (r.length) {
-        let languages = ''
-        r.forEach((item: any) => {
-          languages = languages ? languages + `,${item.id}` : item.id
-        })
-        console.log('selected Languages', languages)
-        this.params.next({ ...this.params.value, translations: languages })
-        this.fetchPageData()
-
-      }
-
+      let languages = ''
+      r.forEach((item: any) => {
+        languages = languages ? languages + `,${item.id}` : item.id
+      })
+      this.params.next({ ...this.params.value, translations: languages })
+      this.fetchPageData()
     })
   }
 
