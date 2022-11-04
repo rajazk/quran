@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { apis } from 'src/environments/environment';
+import { apis } from '../../environments/environment';
 export interface pageParams {
   language?: string
   words?: boolean
