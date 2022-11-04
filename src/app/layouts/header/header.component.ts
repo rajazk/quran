@@ -5,7 +5,7 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'src/app/services/api.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SettingModalComponent } from 'src/app/components/setting-modal/setting-modal.component';
+import { SettingModalComponent } from '../../components/setting-modal/setting-modal.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
