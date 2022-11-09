@@ -3,10 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build"
+  },
+  "engines": {
+    "node": "14.20.0",
+    "npm": "6.14.17"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +28,8 @@
     "@fortawesome/angular-fontawesome": "^0.11.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "express": "^4.18.2",
+    "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -33,6 +40,7 @@
     "@angular/compiler-cli": "^14.1.0",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.2.0",
+    "enhanced-resolve": "^3.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
