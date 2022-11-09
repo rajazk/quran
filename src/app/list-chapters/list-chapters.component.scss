@@ -112,14 +112,21 @@
               cursor     : pointer;
               line-height: 28px;
 
-              .circle {
-                padding         : 10px;
-                background-color: transparent;
-                border          : 1px solid white;
-                border-radius   : 50%;
-              }
-            }
 
+            }
+            .circle {
+              padding         : 10px;
+              background-color: transparent;
+              border          : 1px solid white;
+              border-radius   : 50%;
+              width: 10px;
+              height: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 15px;
+              margin: 0;
+            }
             .word-in-arabic:hover {
               color: #2ca4ab;
             }
