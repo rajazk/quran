@@ -111,6 +111,13 @@
               font-size  : 28px;
               cursor     : pointer;
               line-height: 28px;
+
+              .circle {
+                padding         : 10px;
+                background-color: transparent;
+                border          : 1px solid white;
+                border-radius   : 50%;
+              }
             }
 
             .word-in-arabic:hover {

@@ -39,12 +39,15 @@
             <p class="word-in-arabic" *ngFor="let word of surrah?.words;let wordIndex = index"
               [ngClass]="{'word-in-arabic-higlight': selectedWord === surahIndex+' '+wordIndex }"
               (click)="playAudioOfWord(word,wordIndex,surahIndex)">
-              {{word.text_uthmani}}</p>
+              <span *ngIf="wordIndex <surrah.words.length-1">{{word.text_uthmani}}</span>
+              <span *ngIf="wordIndex ===surrah.words.length-1" class="circle">{{word.text_uthmani}}</span>
+            </p>
           </div>
           <div class="word-in-english-container">
             <p class="word-in-english"
               [ngClass]="{'word-in-english': verse.resource_id === 131,'word-in-urdu': verse.resource_id === 234}"
-              *ngFor="let verse of surrah?.translations" [innerHtml]="sanitizer.bypassSecurityTrustHtml(verse.text)"></p>
+              *ngFor="let verse of surrah?.translations" [innerHtml]="sanitizer.bypassSecurityTrustHtml(verse.text)">
+            </p>
           </div>
         </div>
       </div>
